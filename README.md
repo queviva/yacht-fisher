@@ -11,22 +11,23 @@ this single line:
     );
 ```
 
-will produce a scrambled array with_out_ bias
+will produce a scrambled array _without_ bias
 
 pass it an array `yacht(['a','b','c'])`
 
 this silly thing:
 ```
-const durstenshuffeld = (org, r=[...org], j) =>
+    const durstenshuffeld = (org, r=[...org], j) =>
         
-    r.map((v, i, $,
-        j = ~~(Math.random() * (r.length - i)) + i
-    ) => ([v, r[j]] = [r[j], v], v)
+        r.map((v, i, $,
+            j = ~~(Math.random() * (r.length - i)) + i
+        ) => ([v, r[j]] = [r[j], v], v)
         
-);
+    );
 ```
 also one line, will produce a _forward running_,
-more conventional, durstenshuffeld - incase you
+more conventional, durstenshuffeld which does _not_
+destroy the original array - incase you
 should want such a thing
 
 
