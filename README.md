@@ -1,2 +1,32 @@
 # scramble
-javascript array shuffler [fisher yates knuth durstenfeld]
+yacht-fisherman array scrambler
+
+[https://queviva.github.io/scramble/](bite here)
+
+this single line:
+
+```
+    const yacht = (v, r=[...v]) => v.map(() =>
+        r.splice(~~(Math.random() * r.length), 1)[0]
+    );
+```
+
+will produce a scrambled array with_out_ bias
+
+pass it an array `yacht(['a','b','c'])`
+
+this silly thing:
+```
+const durstenshuffeld = (org, r=[...org], j) =>
+        
+    r.map((v, i, $,
+        j = ~~(Math.random() * (r.length - i)) + i
+    ) => ([v, r[j]] = [r[j], v], v)
+        
+);
+```
+also one line, will produce a _forward running_,
+more conventional, durstenshuffeld - incase you
+should want such a thing
+
+
