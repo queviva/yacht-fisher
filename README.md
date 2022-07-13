@@ -1,7 +1,7 @@
 # scramble
 yacht-fisherman array scrambler
 
-[https://queviva.github.io/scramble/](bite here)
+[bite here](https://queviva.github.io/scramble/)
 
 this single line:
 
