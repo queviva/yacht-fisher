@@ -25,8 +25,11 @@ this silly thing:
     );
 ```
 also one line, will produce a _forward running_,
-more conventional,  [durstenshuffle!](https://queviva.github.io/scramble/)
+more conventional,  [durstenshuffle](https://queviva.github.io/scramble/)
 which does _not_ destroy the original array - incase you
 should want such a thing
+
+[discover why](https://queviva.github.io/scramble/)
+
 
 
