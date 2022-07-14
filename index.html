@@ -1,23 +1,103 @@
 <!doctype html><html lang="en">
     
-<head><title>shuffler</title>
-<style>
+<head>
+<title>yacht~fisherman</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<style id="demoStyles">
 
 @font-face {
     font-family : luckiest;
     src : url(luckiest.ttf);
 }
 
+:root {
+    
+    --circ-h: 0;
+    --circ-s: 40%;
+    --circ-l: 100%;
+    --circ-a: 1;
+                
+    --lightness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        var(--circ-l)
+    );
+    
+    --midness: hsl(
+        var(--circ-h),
+        calc(0.7 * var(--circ-s)),
+        calc(0.7 * var(--circ-l))
+    );
+    
+    --darkness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        calc(0.45 * var(--circ-l))
+    );
+    
+    --blackness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        calc(0.20 * var(--circ-l))
+    );
+                
+    --main-color: var(--lightness);
+    --greyed-out: var(--darkness);
+    --back-color: #666;
+    --holder-back: #111;
+    --faded-txt: hsla(
+        var(--circ-h),
+        var(--circ-s),
+        var(--midness),
+        0.5
+    );
+    
+    --trans-speed: 0.3s;
+    
+}
+
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
 body {
     padding: 0;
-    margin: 2px;
-    background-color: #111;
-    color: #eee;
+    margin: 0;
+    background-color: var(--back-color);
+    font-size: 22px;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.holder {
+    
+	position: relative;
+    color: var(--main-color);
+    background-color: var(--holder-back);
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+    
+}
+
+a {
+    text-decoration: none;
+    color: var(--darkness);
+}
+
+a:hover, a:visited {
+    transition: color linear var(--trans-speed);
+    color: var(--darkness);
 }
 
 pre {
-    width: 100%;
-    overflow: scroll;
+    background-color: var(--midness);
+    margin: 0px;
+    padding: 10px;
+    color: var(--lightness);
+    overflow: auto;
 }
 
 emp {
@@ -32,44 +112,156 @@ sup {
     font-style: italic;
 }
 
-a {
-    text-decoration: none;
-    color: #fff;
+hr {
+    border-top: 1px solid var(--blackness);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 7px 0px 7px 0px;
 }
 
-a:hover, a:visited {
-    transition: color linear var(--trans-speed);
-    color: #fff;
+.qa > div > a, .qa > div  > a,
+.qb > div > a, .qb > div  > a,
+.qa > div > a:hover, .qa > div  > a:visited,
+.qb > div > a:hover, .qb > div> a:visited
+{
+    color: var(--lightness);
 }
 
-#intro {
-    padding: 20px;
-    font-size: 26px;
-    hyphens: auto;
-    text-align: justify;
+.qr > b {
+    color: var(--darkness);
 }
 
-#holder {
+.qa > div > b,
+.qb > div > b {
+    color: var(--lightness);
+}
+
+.qr {
+    padding: 10px;
+}
+
+.qa:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qa > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qa > div:nth-child(1) {
+  width: 65%;
+}
+
+.qa > div:nth-child(2) {
+  width: 35%;
+}
+
+.qb:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qb > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qb > div:nth-child(1) {
+  width: 35%;
+}
+
+.qb > div:nth-child(2) {
+  width: 65%;
+}
+
+.qa, .qb {
+    color: var(--lightness);
+}
+
+.mobr {
+    display: none;
+}
+
+.hobr {
+    display: inline-block;
+}
+
+.abhr {
+    display: none;
+}
+
+/*possibly a portrait mobi-fone*/
+@media screen and (max-width:500px) {
+
+	.qa > div:nth-child(1),
+	.qa > div:nth-child(2),
+	.qb > div:nth-child(1),
+	.qb > div:nth-child(2)
+	{
+    	width: 100%;
+    }
+    
+    .mobr {
+        display: inline-block;
+    }
+    .hobr {
+        display: none;
+    }
+    .abhr {
+        display: block;
+    }
+    ul {
+        text-align: left;
+    }
+
+}
+
+/*possibly a mobile landscraper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+
+    
+}
+
+.signature {
+    text-align: right;
+    font-family: 'luckiest';
+    font-style: italic;
+    height: 200px;
+    color: var(--darkness);
+    user-select:none;
+}
+
+</style>
+<style id="chartStyles">
+
+#chart {
+    height: 200px;
+    width: 100%;
     display: grid;
     grid-column-gap: 2px;
     grid-row-gap: 5px;
     --barH: 50px;
     cursor: auto;
-    height: 240px;
     overflow: scroll;
     resize: vertical;
 }
 
-#holder > div {
+#chart > div {
     position: relative;
     text-align: center;
     height: var(--barH);
 }
 
-#holder > div > div {
+#chart > div > div {
     position: absolute;
     width: 100%;
-    background-color: #c30;
 }
 
 .msg {
@@ -79,12 +271,12 @@ a:hover, a:visited {
 }
 
 .txt {
-    color: #fb0;
+    color: var(--darkness);
     transition: color linear 250ms;
 }
 
 .txt:hover {
-    color: #f0f;
+    color: var(--midness);
     transition: color linear 250ms;
 }
 
@@ -92,18 +284,16 @@ a:hover, a:visited {
     text-align: justify;
 }
 
-#sig {
-    height: 50px;
-    text-align: right;
-    overflow: auto;
-}
-
 </style>
 </head>
 
 <body>
-<div id="holder"></div>
-<div id="intro">
+<div class="holder">
+    
+    <div class="qr" id="chart"></div>
+
+    <div intro class="qr">
+    <hr><br>
     naive shuffling has <emp>No bias</emp>,
     despite furious insistance to the contrary;
     this implimentation of the
@@ -116,72 +306,113 @@ a:hover, a:visited {
     easily passes a <i>runs test</i>
     [among other flavors of random candy];
     it neither displays a preference for any
-    specific permutation,
+    particular permutation
     nor contains any cyclical pattern
-    <br><br>
+    </div>
+
+    <hr>
+    <div scramcode class="qr">
     in javascript, the <i>yacht-fischermann</i>
     algorithm requires only a single line of code:
-    <br>
+    <br><br>
     <pre>
-    const scramble = v => v.forEach((_, i) => v.push(
-        v.splice(~~(Math.random() * (v.length - i)), 1)[0]
-    ));
+        
+const scramble = v => v.forEach((_, i) => v.push(
+    v.splice(~~(Math.random() * (v.length - i)), 1)[0]
+));
     </pre>
+    </div>
     
-    Yacht and Fleischermann developed the first
-    workable model of the 17<sup>th</sup> century
-    natural philosopher
-    <a href="https://en.wikipedia.org/wiki/Naivety">
-    Na&#239;vett&#233;'s</a> algorithm for
-    <i>le brouilage d'un jeu de cartes &#224; jouer:</i>
+    <hr>
+    <div history class="qa">
 
-    <ul>
-        <li>
-            pick a number from one to fifty-two
-        </li>
-        <li>place that card on the bottom of the deck</li>
+        <div style="color:var(--lightness);">
+            Yacht and Fleischermann developed the first
+            workable model of the 17<sup>th</sup> century
+            natural philosopher
+            <a href="https://en.wikipedia.org/wiki/Naivety">
+            Na&#239;vett&#233;'s</a> algorithm for
+            <i>le brouilage d'un jeu de
+            cartes &#224; jouer:</i>
+        </div>
         
-        <li>
-            pick a number from one to fifty-ONE
-        </li>
-        <li>place that card on the bottom of the deck</li>
-        
-        <li>
-            pick a number from one to <i>fifty</i>
-        </li>
-        <li>
-            place that card on the  ...
-            are you seeing a pattern yet?
-        </li>
-        
-    </ul>
+        <div class="hobr" style="text-align:center;">
+            <svg viewbox="0 0 550 550"
+             style="
+                transform: scale(-1, 1);
+                width:150px;
+                --yacht-color: var(--midness);
+                --xhull-color: #b0b;
+                --xtower-color: #800;
+                --xrod-color: #008;
+                --xwindow-visibility: visible;
+                --xwindow-color: #fb0;
+             "
+            >
+                <use xlink:href="yacht.svg#ikon" />
+            </svg>
+        </div>
     
+    </div>
+
+    <div shufflesteps class="qb">
+        
+        <div>
+            <svg viewbox="0 0 550 550"
+             style="
+                width:100%;
+                --yacht-color: var(--blackness);
+             "
+            >
+                <use xlink:href="yacht.svg#ikon" />
+            </svg>
+        </div>
+        
+        <div>
+            <ul style="list-style-type:circle;">
+            <li>pick a number from one to fifty-two</li>
+            <li>place that card on the bottom of the deck</li>
+            <li>pick a number from one to fifty-ONE</li>
+            <li>place that card on the bottom of the deck</li>
+            <li>pick a number from one to <i>fifty</i></li>
+            <li>place that card on the  ...
+                are you seeing a pattern yet?</li>
+            </ul>
+        </div>
+    
+    </div>
+    
+    <hr>
+    <div YACHT_METHOD class="qr">
     a non-mutating evolution of the
     Yacht von Fleischerm&#228;nn algorithm
     might look like this, slightly shorter line
     that dispenses with the heavy-handed <i>push()</i>:
     <br>
-    
+    <br>
     <pre>
-    const yacht = (v, r=[...v]) => v.map(() =>
-        r.splice(~~(Math.random() * r.length), 1)[0]
-    );
+        
+const yacht = (v, r=[...v]) => v.map(() =>
+    r.splice(~~(Math.random() * r.length), 1)[0]
+);
     </pre>
-    
+    <br>
     this returns a new array, as a map,
     <i>without</i> mutating the original array;
     the default parameter
     <i>r=[...v]</i> uses a spread operator to
     make a safe copy of the input value for
     <i>splice()</i> to destroy
-    <br><br>
+    </div>
+    
     <hr>
-    <br>
+    <div durstenshuffeld class="qr">
     but you insist upon using some silly
     <i>durstenshuffeld</i> fiasco!
     well then, at least compose it in some
     reasonable, <i>forward iterating</i>,
     and concise manner, you fool:
+    <br><br>
     
     <pre>
     const yacht-fisherfeld = v =>
@@ -194,17 +425,17 @@ a:hover, a:visited {
         
     );
     </pre>
-    
+    <br>
     that method preserves the original array
     with a <i>map()</i>, floors the random float
     using a <i>double bitwise~not</i>,
     and swaps array values with a destructured
     assignment
-    <hr>
+    </div>
     
+    <div id="dataDiv" class="qr"></div>
+    <div id="sig" class="qr signature"><i>~queviva</i></div>
 </div>
-<div id="dataDiv"></div>
-<div id="sig"><i>~queviva</i></div>
 </body>
 
 <script>
@@ -213,14 +444,14 @@ new function () {
 
     // prefs {
 
-    const loops = 10000;
+    const loops = 100000;
     const trials = 5;
     const size = 5;
     const showTitle = size < 5;
     const showRands = false;
     
-    const hiColor = '#fb0';
-    const loColor = '#f0f';
+    const hiColor = 'var(--midness)';
+    const loColor = 'var(--darkness)';
     
     const message = 'click to show raw & rerun';
 
@@ -280,15 +511,15 @@ new function () {
     const perk = loops / permLength;
 
     const barH = parseInt(
-        window.getComputedStyle(holder)
+        window.getComputedStyle(chart)
         .getPropertyValue('--barH'),10
     ) / 2;
 
-    holder.style.gridTemplateColumns = 'repeat(' +
+    chart.style.gridTemplateColumns = 'repeat(' +
         permLength + ', 1fr)';
 
-    holder.style.gridTemplateRows    = 'repeat(' +
-        permLength + ', 1fr)';
+    chart.style.gridTemplateRows    = 'repeat(' +
+        permLength + ', 1fr, auto)';
 
     const msg = document.createElement('div');
     msg.classList.add('msg');
@@ -313,7 +544,7 @@ new function () {
             tmp.innerHTML = v;
             tmp.style.color = '#fff';
             tmp.style.fontSize = '10px';
-            holder.appendChild(tmp);
+            chart.appendChild(tmp);
     
         });
     };
@@ -377,8 +608,8 @@ new function () {
         
         } else {
             
-            holder.style.cursor = 'auto';
-            holder.appendChild(msg);
+            chart.style.cursor = 'auto';
+            chart.appendChild(msg);
             
         }
         
@@ -416,7 +647,7 @@ new function () {
             }
 
             tmp.appendChild(bar);
-            holder.appendChild(tmp);
+            chart.appendChild(tmp);
 
         });
         
@@ -424,8 +655,8 @@ new function () {
     
     const genData = () => {
         clearTimeout(looping);
-        holder.innerHTML = '';
-        holder.style.cursor = 'wait';
+        chart.innerHTML = '';
+        chart.style.cursor = 'wait';
         buildHead();
         count = 0;
         trialData = [];
