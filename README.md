@@ -14,7 +14,7 @@ this single line:
 will produce a scrambled array _without_ bias;
 [find out why!](https://queviva.github.io/scramble/)
 
-<img src="yacht.svg" width="100px">
+<img src="yacht.png" width="100px">
 
 this silly thing:
 ```
