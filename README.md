@@ -16,7 +16,7 @@ will produce a scrambled array _without_ bias;
 
 this silly thing:
 ```
-    const durstenshuffeld = v =>
+    const yacht-stenshuffeld = v =>
         
         [...v].map((x, i, r,
         

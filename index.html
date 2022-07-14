@@ -107,7 +107,7 @@ a:hover, a:visited {
     naive shuffling has <emp>No bias</emp>,
     despite furious insistance to the contrary;
     this implimentation of the
-    <i>yacht~fisherman</i> algorithm
+    <b><i>yacht~fisherman</i></b> algorithm
     demonstrates that outcomes from the
     most blatantly amateur method of
     rearrangement can not be distinguished
@@ -158,15 +158,49 @@ a:hover, a:visited {
     
     a non-mutating evolution of the
     Yacht von Fleischerm&#228;nn algorithm
-    might look like this, slightly shorter,
-    line:
+    might look like this, slightly shorter line
+    that dispenses with the heavy-handed <i>push()</i>:
     <br>
     
     <pre>
-    const shuffle = (v, r=[...v]) => v.map(
-        () => r.splice(~~(Math.random() * r.length), 1)[0]
+    const yacht = (v, r=[...v]) => v.map(() =>
+        r.splice(~~(Math.random() * r.length), 1)[0]
     );
     </pre>
+    
+    this returns a new array, as a map,
+    <i>without</i> mutating the original array;
+    the default parameter
+    <i>r=[...v]</i> uses a spread operator to
+    make a safe copy of the input value for
+    <i>splice()</i> to destroy
+    <br><br>
+    <hr>
+    <br>
+    but you insist upon using some silly
+    <i>durstenshuffeld</i> fiasco!
+    well then, at least compose it in some
+    reasonable, <i>forward iterating</i>,
+    and concise manner, you fool:
+    
+    <pre>
+    const yacht-fisherfeld = v =>
+        
+        [...v].map((x, i, r,
+        
+            j = ~~(Math.random() * (r.length - i)) + i
+            
+        ) => ([x, r[j]] = [r[j], x], x)
+        
+    );
+    </pre>
+    
+    that method preserves the original array
+    with a <i>map()</i>, floors the random float
+    using a <i>double bitwise~not</i>,
+    and swaps array values with a destructured
+    assignment
+    <hr>
     
 </div>
 <div id="dataDiv"></div>
@@ -179,7 +213,7 @@ new function () {
 
     // prefs {
 
-    const loops = 100000;
+    const loops = 10000;
     const trials = 5;
     const size = 5;
     const showTitle = size < 5;
@@ -229,16 +263,7 @@ new function () {
         v.splice(~~(Math.random() * (v.length - i)), 1)[0]
     ))
     
-    ,(v, array=[...v]) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            
-            let j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-    
-    ][2];
+    ][0];
         
     //}
 
@@ -444,23 +469,6 @@ new function () {
     genData();
     
     //}
-    
-    /*
-    const rat = 'abcdefg'.split('');
-    
-    const durstenshuffeld = v =>
-        
-        [...v].map((x, i, r,
-            j = ~~(Math.random() * (r.length - i)) + i
-        ) => ([x, r[j]] = [r[j], x], x)
-        
-    );
-    
-    log(
-        durstenshuffeld(rat).join('')
-        ,rat.join('')
-    )
-    */
     
 }();
 
