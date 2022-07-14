@@ -1,4 +1,4 @@
-# scramble
+# scrambiliare
 yacht-fisherman array scrambler
 
 [bite here](https://queviva.github.io/scramble/)
@@ -16,11 +16,11 @@ will produce a scrambled array _without_ bias;
 
 this silly thing:
 ```
-    const durstenshuffeld = (org, r=[...org], j) =>
+    const durstenshuffeld = (v, r=[...v], j) =>
         
-        r.map((v, i, $,
+        r.map((x, i, _,
             j = ~~(Math.random() * (r.length - i)) + i
-        ) => ([v, r[j]] = [r[j], v], v)
+        ) => ([x, r[j]] = [r[j], x], x)
         
     );
 ```
