@@ -179,9 +179,9 @@ new function () {
 
     // prefs {
 
-    const loops = 1000;
+    const loops = 100000;
     const trials = 5;
-    const size = 4;
+    const size = 5;
     const showTitle = size < 5;
     const showRands = false;
     
@@ -445,32 +445,27 @@ new function () {
     
     //}
     
-    let testArr = 'abcdefg'.split('')
-    
-    const orgDurr = (v, array=[...v]) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-            log(i,j)
-        }
-        return array;
-    }
-
     const rat = 'abcdefg'.split('');
     
-  //const master = r =>
-    const master = (org, r=[...org], j) =>
+    const durstenshuffeld = v =>
         
-        r.map((v, i, $,
+        [...v].map((x, i, r,
             j = ~~(Math.random() * (r.length - i)) + i
-        ) => ([v, r[j]] = [r[j], v], v)
+        ) => ([x, r[j]] = [r[j], x], x)
         
     );
     
     log(
-        master(rat).join('')
+        durstenshuffeld(rat).join('')
         ,rat.join('')
     )
+    
+    log(
+        'fuck your self'.split('').map((x, i, r,
+            j = ~~(Math.random() * (r.length - i)) + i
+        ) => ([x, r[j]] = [r[j], x], x)).join('')
+    )
+    
     
 }();
 

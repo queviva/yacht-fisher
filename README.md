@@ -16,16 +16,19 @@ will produce a scrambled array _without_ bias;
 
 this silly thing:
 ```
-    const durstenshuffeld = (v, r=[...v], j) =>
+    const durstenshuffeld = v =>
         
-        r.map((x, i, _,
+        [...v].map((x, i, r,
+        
             j = ~~(Math.random() * (r.length - i)) + i
+            
         ) => ([x, r[j]] = [r[j], x], x)
         
     );
 ```
 also one line, will produce a _forward running_,
-more conventional,  [durstenshuffle](https://queviva.github.io/scramble/)
+more conventional,
+[durstenshuffle](https://queviva.github.io/scramble/)
 which does _not_ destroy the original array - incase you
 should want such a thing
 
