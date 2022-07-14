@@ -235,6 +235,7 @@ hr {
     font-style: italic;
     height: 200px;
     color: var(--darkness);
+    -webkit-text-stroke: 1px var(--midness);
     user-select:none;
 }
 
@@ -386,7 +387,7 @@ const scramble = v => v.forEach((_, i) => v.push(
     <div YACHT_METHOD class="qr">
     a non-mutating evolution of the
     Yacht von Fleischerm&#228;nn algorithm
-    might look like this, slightly shorter line
+    might look like this, slightly shorter line,
     that dispenses with the heavy-handed <i>push()</i>:
     <br>
     <br>
