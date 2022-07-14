@@ -1,0 +1,479 @@
+<!doctype html><html lang="en">
+    
+<head><title>shuffler</title>
+<style>
+
+@font-face {
+    font-family : luckiest;
+    src : url(luckiest.ttf);
+}
+
+body {
+    padding: 0;
+    margin: 2px;
+    background-color: #111;
+    color: #eee;
+}
+
+pre {
+    width: 100%;
+    overflow: scroll;
+}
+
+emp {
+    font-family: luckiest;
+    font-style: italic;
+    font-weight: bold;
+    -webkit-text-stroke: 2px #888;
+}
+
+sup {
+    font-size: 0.5em;
+    font-style: italic;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover, a:visited {
+    transition: color linear var(--trans-speed);
+    color: #fff;
+}
+
+#intro {
+    padding: 20px;
+    font-size: 26px;
+    hyphens: auto;
+    text-align: justify;
+}
+
+#holder {
+    display: grid;
+    grid-column-gap: 2px;
+    grid-row-gap: 5px;
+    --barH: 50px;
+    cursor: auto;
+    height: 240px;
+    overflow: scroll;
+    resize: vertical;
+}
+
+#holder > div {
+    position: relative;
+    text-align: center;
+    height: var(--barH);
+}
+
+#holder > div > div {
+    position: absolute;
+    width: 100%;
+    background-color: #c30;
+}
+
+.msg {
+    text-align: center;
+    grid-column: 1 / -1;
+    cursor: pointer;
+}
+
+.txt {
+    color: #fb0;
+    transition: color linear 250ms;
+}
+
+.txt:hover {
+    color: #f0f;
+    transition: color linear 250ms;
+}
+
+#dataDiv {
+    text-align: justify;
+}
+
+#sig {
+    height: 50px;
+    text-align: right;
+    overflow: auto;
+}
+
+</style>
+</head>
+
+<body>
+<div id="holder"></div>
+<div id="intro">
+    naive shuffling has <emp>No bias</emp>,
+    despite furious insistance to the contrary;
+    this implimentation of the
+    <i>yacht~fisherman</i> algorithm
+    demonstrates that outcomes from the
+    most blatantly amateur method of
+    rearrangement can not be distinguished
+    from random - besides the obvious reaction
+    to viewing the histograms, data from these trials
+    easily passes a <i>runs test</i>
+    [among other flavors of random candy];
+    it neither displays a preference for any
+    specific permutation,
+    nor contains any cyclical pattern
+    <br><br>
+    in javascript, the <i>yacht-fischermann</i>
+    algorithm requires only a single line of code:
+    <br>
+    <pre>
+    const scramble = v => v.forEach((_, i) => v.push(
+        v.splice(~~(Math.random() * (v.length - i)), 1)[0]
+    ));
+    </pre>
+    
+    Yacht and Fleischermann developed the first
+    workable model of the 17<sup>th</sup> century
+    natural philosopher
+    <a href="https://en.wikipedia.org/wiki/Naivety">
+    Na&#239;vett&#233;'s</a> algorithm for
+    <i>le brouilage d'un jeu de cartes &#224; jouer:</i>
+
+    <ul>
+        <li>
+            pick a number from one to fifty-two
+        </li>
+        <li>place that card on the bottom of the deck</li>
+        
+        <li>
+            pick a number from one to fifty-ONE
+        </li>
+        <li>place that card on the bottom of the deck</li>
+        
+        <li>
+            pick a number from one to <i>fifty</i>
+        </li>
+        <li>
+            place that card on the  ...
+            are you seeing a pattern yet?
+        </li>
+        
+    </ul>
+    
+    a non-mutating evolution of the
+    Yacht von Fleischerm&#228;nn algorithm
+    might look like this, slightly shorter,
+    line:
+    <br>
+    
+    <pre>
+    const shuffle = (v, r=[...v]) => v.map(
+        () => r.splice(~~(Math.random() * r.length), 1)[0]
+    );
+    </pre>
+    
+</div>
+<div id="dataDiv"></div>
+<div id="sig"><i>~queviva</i></div>
+</body>
+
+<script>
+
+new function () {
+
+    // prefs {
+
+    const loops = 1000;
+    const trials = 5;
+    const size = 4;
+    const showTitle = size < 5;
+    const showRands = false;
+    
+    const hiColor = '#fb0';
+    const loColor = '#f0f';
+    
+    const message = 'click to show raw & rerun';
+
+    //}
+
+    // utils {
+    
+    const log = console.log;
+    const abs = Math.abs;
+    const max = Math.max;
+
+    const rand = () => [...crypto.getRandomValues(
+        new Uint32Array(1)
+    )].map(v => v / 4294967296.5)[0];
+
+    const randArray = n => [...crypto.getRandomValues(
+        new Uint32Array(n)
+    )].map(v => v / 4294967296.5);
+
+    const fact = n => [...new Array(n-2)].reduce((v, _, i) =>
+        v * (i + 3)
+    , 2);
+    
+    const perm = a => a.length ? a.flatMap(b =>
+        perm(a.filter(c => c !== b)).map(d => [b, ...d])
+    ).map(f => f.join('')) : [[]];
+        
+
+    // }
+    
+    // SHUFFLE {
+
+    const shuffle = [
+        
+    (v, r=[...v]) => v.map(() =>
+        r.splice(~~(Math.random() * r.length), 1)[0]
+    ),
+    
+    v => v.forEach((_, i) => v.push(
+        v.splice(~~(Math.random() * (v.length - i)), 1)[0]
+    ))
+    
+    ,(v, array=[...v]) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    ][2];
+        
+    //}
+
+    // setup {
+    
+    const list = 'zyxwvutsrqp'.split('').splice(0, size);
+    
+    const perms = perm(list).reduce((o,k)=>({...o,[k]:0}),{});
+    
+    const ordList = Object.keys(perms).sort();
+    
+    const permLength = ordList.length;
+    
+    const perk = loops / permLength;
+
+    const barH = parseInt(
+        window.getComputedStyle(holder)
+        .getPropertyValue('--barH'),10
+    ) / 2;
+
+    holder.style.gridTemplateColumns = 'repeat(' +
+        permLength + ', 1fr)';
+
+    holder.style.gridTemplateRows    = 'repeat(' +
+        permLength + ', 1fr)';
+
+    const msg = document.createElement('div');
+    msg.classList.add('msg');
+            
+    const txt = document.createElement('i');
+    txt.classList.add('txt');
+    txt.innerText = message;
+    
+    msg.appendChild(txt);
+    
+    //}
+    
+    // methods {
+    
+    const buildHead = () => {
+    
+        !showTitle ||
+        
+        ordList.forEach(v => {
+    
+            let tmp = document.createElement('div');
+            tmp.innerHTML = v;
+            tmp.style.color = '#fff';
+            tmp.style.fontSize = '10px';
+            holder.appendChild(tmp);
+    
+        });
+    };
+    
+    const buildData = () => {
+        
+        let graph = { ...perms };
+        
+        for (let i=0; i < loops; i++) {
+            
+            /* shuffle[ONE]
+            let Q = [...list];
+            shuffle(Q);
+            graph[Q.join('')]++;
+            */
+            
+            // shuffle[ZER]
+            graph[shuffle(list).join('')]++;
+            
+        }
+        
+        return graph;
+        
+    };
+    
+    const buildRows = () => {
+        
+        if (count < trials) {
+        
+            const x = buildData();
+        
+            Object.keys(x).forEach(k => x[k] -= perk);
+        
+            buildBars(x);
+            
+            if (showRands) {
+        
+                looping = setTimeout(() => {
+                
+                    const rands = { ...perms };
+                
+                    Object.keys(rands).forEach(k =>
+                        rands[k] = rand() * 200 - 100
+                    );
+                
+                    buildBars(rands);
+                    
+                    count++;
+                    setTimeout(buildRows, 0);
+                    
+                }, 0);
+        
+            }
+            else {
+                count++;
+                looping = setTimeout(buildRows, 0);
+            }
+        
+            trialData.push(x);
+        
+        
+        } else {
+            
+            holder.style.cursor = 'auto';
+            holder.appendChild(msg);
+            
+        }
+        
+    };
+    
+    const buildBars = data => {
+        
+        const maxi = max(...(
+            Object.values(data).map(v => abs(v))
+        ));
+        
+        ordList.forEach(v => {
+
+            let tmp = document.createElement('div');
+
+            let bar = document.createElement('div');
+            
+            bar.style.fontSize = '10px';
+          //bar.innerHTML = showTitle ? v : '';
+
+            bar.style.height = barH * abs(data[v]) / maxi
+                + 'px';
+
+            if (data[v] >= 0) {
+
+                bar.style.backgroundColor = hiColor;
+                bar.style.bottom = '50%';
+
+            }
+            else {
+
+                bar.style.backgroundColor = loColor;
+                bar.style.top = '50%';
+
+            }
+
+            tmp.appendChild(bar);
+            holder.appendChild(tmp);
+
+        });
+        
+    };
+    
+    const genData = () => {
+        clearTimeout(looping);
+        holder.innerHTML = '';
+        holder.style.cursor = 'wait';
+        buildHead();
+        count = 0;
+        trialData = [];
+        looping = setTimeout(buildRows, 0);
+    }
+    
+    //}
+    
+    // looping vars {
+    let looping, trialData, count;
+    //}
+    
+    // add lizzers {
+    
+    sig.addEventListener('click', () => {
+        sig.innerHTML = '~' +
+        shuffle('queviva'.split('')).join('');
+    });
+    
+    msg.addEventListener('click', () => {
+        
+        let dataCopy = [ ...trialData ];
+        
+        for (let i in dataCopy) {
+            for (let j in dataCopy[i]) {
+                dataCopy[i][j] = dataCopy[i][j].toFixed(3);
+            }
+        }
+        
+        dataDiv.innerHTML += (JSON.stringify(dataCopy))
+        .replace(/,/g,', ');
+        
+        genData();
+        
+    });
+    
+    //}
+    
+    // init {
+    
+    genData();
+    
+    //}
+    
+    let testArr = 'abcdefg'.split('')
+    
+    const orgDurr = (v, array=[...v]) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+            log(i,j)
+        }
+        return array;
+    }
+
+    const rat = 'abcdefg'.split('');
+    
+  //const master = r =>
+    const master = (org, r=[...org], j) =>
+        
+        r.map((v, i, $,
+            j = ~~(Math.random() * (r.length - i)) + i
+        ) => ([v, r[j]] = [r[j], v], v)
+        
+    );
+    
+    log(
+        master(rat).join('')
+        ,rat.join('')
+    )
+    
+}();
+
+</script>
+
+</html>

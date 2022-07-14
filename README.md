@@ -11,9 +11,8 @@ this single line:
     );
 ```
 
-will produce a scrambled array _without_ bias
-
-pass it an array `yacht(['a','b','c'])`
+will produce a scrambled array _without_ bias;
+[find out why!](https://queviva.github.io/scramble/)
 
 this silly thing:
 ```
@@ -26,8 +25,8 @@ this silly thing:
     );
 ```
 also one line, will produce a _forward running_,
-more conventional, durstenshuffeld which does _not_
-destroy the original array - incase you
+more conventional,  [durstenshuffle!](https://queviva.github.io/scramble/)
+which does _not_ destroy the original array - incase you
 should want such a thing
 
 
