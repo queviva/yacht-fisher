@@ -14,6 +14,8 @@ this single line:
 will produce a scrambled array _without_ bias;
 [find out why!](https://queviva.github.io/scramble/)
 
+<img src="yacht.svg" width="100px">
+
 this silly thing:
 ```
     const yacht-stenshuffeld = v =>
