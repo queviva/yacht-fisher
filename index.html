@@ -95,10 +95,10 @@ a:hover, a:visited {
 }
 
 pre {
-    background-color: var(--midness);
+    background-color: var(--blackness);
     margin: 0px;
     padding: 10px;
-    color: var(--lightness);
+    color: var(--midness);
     overflow: auto;
 }
 
@@ -236,8 +236,8 @@ hr {
     font-family: 'luckiest';
     font-style: italic;
     height: 200px;
-    color: var(--darkness);
-    -webkit-text-stroke: 1px var(--midness);
+    color: var(--blackness);
+    -webkit-text-stroke: 1px var(--darkness);
     user-select:none;
 }
 
@@ -323,8 +323,8 @@ hr {
     <br><br>
     <pre>
         
-const scramble = v => v.forEach((_, i) => v.push(
-    v.splice(~~(Math.random() * (v.length - i)), 1)[0]
+const yacht = v => v.forEach((_, i) => v.push(
+    v.splice(~~(Math.random()*(v.length-i)),1)[0]
 ));
     </pre>
     </div>
