@@ -296,7 +296,7 @@ hr {
     
     <div id="chart" class="qr"></div>
 
-    <div intro class="qr">
+    <div no_bias class="qr">
     <hr><br>
     naive shuffling has <emp>No bias</emp>,
     despite furious insistance to the contrary;
@@ -306,9 +306,10 @@ hr {
     demonstrates that outcomes from the
     most blatantly amateur method of
     rearrangement can not be distinguished
-    from random - besides the obvious reaction
-    to viewing the histograms, data from these trials
-    easily passes a <i>runs test</i>
+    from random - besides the obvious fair
+    distribution seen in these histograms,
+    data from the trials easily passes a
+    <i>runs test</i>
     [among other flavors of random candy];
     it neither displays a preference for any
     particular permutation
@@ -316,7 +317,7 @@ hr {
     </div>
 
     <hr>
-    <div scramcode class="qr">
+    <div scram_code class="qr">
     in javascript, the <i>yacht-fischermann</i>
     algorithm requires only a single line of code:
     <br><br>
@@ -361,13 +362,12 @@ const scramble = v => v.forEach((_, i) => v.push(
     
     </div>
 
-    <div shufflesteps class="qb">
+    <div shuffle_steps class="qb">
         
         <div svg>
             <svg viewbox="0 0 550 550"
              style="
                 width:100%;
-                --xyacht-color: var(--blackness);
                 --yacht-color: #111;
                 background-image: linear-gradient(
                 var(--blackness), var(--midness)
@@ -412,12 +412,14 @@ const yacht = (v, r=[...v]) => v.map(() =>
     <i>without</i> mutating the original array;
     the default parameter
     <i>r=[...v]</i> uses a spread operator to
-    make a safe copy of the input value for
-    <i>splice()</i> to destroy
+    make a copy of the input value for
+    <i>splice()</i> to safely destroy;
+    this code generated the values for the
+    histograms
     </div>
     
     <hr>
-    <div durstenshuffeld class="qr">
+    <div dursten_shuffeld class="qr">
     but you insist upon using some silly
     <i>durstenshuffeld</i> fiasco!
     well then, at least compose it in some
@@ -454,13 +456,18 @@ const yacht-fisherfeld = v =>
 
 <script>
 
+/////////////////////////////////////////////////////////{
+// pizzaface
+//
+/////////////////////////////////////////////////////////}
+
 new function () {
 
     // prefs {
 
     const loops = 100000;
     const trials = 5;
-    const size = 4;
+    const size = 5;
     const showTitle = size < 5;
     const showRands = false;
     
@@ -504,9 +511,9 @@ new function () {
         r.splice(~~(Math.random() * r.length), 1)[0]
     ),
     
-    v => v.forEach((_, i) => v.push(
-        v.splice(~~(Math.random() * (v.length - i)), 1)[0]
-    ))
+    v => [...v].map((x, i, r,
+            j = ~~(Math.random() * (r.length - i)) + i
+    ) => ([x, r[j]] = [r[j], x], x))
     
     ][0];
         
@@ -569,13 +576,6 @@ new function () {
         
         for (let i=0; i < loops; i++) {
             
-            /* shuffle[ONE]
-            let Q = [...list];
-            shuffle(Q);
-            graph[Q.join('')]++;
-            */
-            
-            // shuffle[ZER]
             graph[shuffle(list).join('')]++;
             
         }
@@ -624,7 +624,6 @@ new function () {
             
             chart.style.cursor = 'auto';
             chart.appendChild(msg);
-            
         }
         
     };
@@ -642,7 +641,6 @@ new function () {
             let bar = document.createElement('div');
             
             bar.style.fontSize = '10px';
-          //bar.innerHTML = showTitle ? v : '';
 
             bar.style.height = barH * abs(data[v]) / maxi
                 + 'px';
@@ -710,7 +708,7 @@ new function () {
     //}
     
     // init {
-    
+
     genData();
     
     //}
