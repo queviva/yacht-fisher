@@ -13,33 +13,35 @@ content="width=device-width, initial-scale=1.0">
 
 :root {
     
-    --circ-h: 0;
-    --circ-s: 40%;
-    --circ-l: 100%;
-    --circ-a: 1;
+    --nose-hsla: hsla(0, 40%, 100%, 1);
+    
+    --nose-h: 0;
+    --nose-s: 40%;
+    --nose-l: 100%;
+    --nose-a: 1;
                 
     --lightness: hsl(
-        var(--circ-h),
-        var(--circ-s),
-        var(--circ-l)
+        var(--nose-h),
+        var(--nose-s),
+        var(--nose-l)
     );
     
     --midness: hsl(
-        var(--circ-h),
-        calc(0.7 * var(--circ-s)),
-        calc(0.7 * var(--circ-l))
+        var(--nose-h),
+        calc(0.7 * var(--nose-s)),
+        calc(0.7 * var(--nose-l))
     );
     
     --darkness: hsl(
-        var(--circ-h),
-        var(--circ-s),
-        calc(0.45 * var(--circ-l))
+        var(--nose-h),
+        var(--nose-s),
+        calc(0.45 * var(--nose-l))
     );
     
     --blackness: hsl(
-        var(--circ-h),
-        var(--circ-s),
-        calc(0.20 * var(--circ-l))
+        var(--nose-h),
+        var(--nose-s),
+        calc(0.20 * var(--nose-l))
     );
                 
     --main-color: var(--lightness);
@@ -47,8 +49,8 @@ content="width=device-width, initial-scale=1.0">
     --back-color: #666;
     --holder-back: #111;
     --faded-txt: hsla(
-        var(--circ-h),
-        var(--circ-s),
+        var(--nose-h),
+        var(--nose-s),
         var(--midness),
         0.5
     );
@@ -286,17 +288,19 @@ hr {
 }
 
 </style>
+<script defer src="nanopicker.js"></script>
 </head>
 
 <body>
 <div class="holder">
     
-    <div class="qr" id="chart"></div>
+    <div id="chart" class="qr"></div>
 
     <div intro class="qr">
     <hr><br>
     naive shuffling has <emp>No bias</emp>,
     despite furious insistance to the contrary;
+    <br><br>
     this implimentation of the
     <b><i>yacht~fisherman</i></b> algorithm
     demonstrates that outcomes from the
@@ -327,7 +331,7 @@ const scramble = v => v.forEach((_, i) => v.push(
     <hr>
     <div history class="qa">
 
-        <div style="color:var(--lightness);">
+        <div>
             Yacht and Fleischermann developed the first
             workable model of the 17<sup>th</sup> century
             natural philosopher
@@ -350,7 +354,8 @@ const scramble = v => v.forEach((_, i) => v.push(
                 --xwindow-color: #fb0;
              "
             >
-                <use xlink:href="yacht.svg#ikon" />
+                <use xlink:href="yacht.svg#ikon"
+                 data-nose=":root" />
             </svg>
         </div>
     
@@ -358,14 +363,19 @@ const scramble = v => v.forEach((_, i) => v.push(
 
     <div shufflesteps class="qb">
         
-        <div>
+        <div svg>
             <svg viewbox="0 0 550 550"
              style="
                 width:100%;
-                --yacht-color: var(--blackness);
+                --xyacht-color: var(--blackness);
+                --yacht-color: #111;
+                background-image: linear-gradient(
+                var(--blackness), var(--midness)
+                );
              "
             >
-                <use xlink:href="yacht.svg#ikon" />
+                <use data-nose=":root"
+                xlink:href="yacht.svg#ikon" />
             </svg>
         </div>
         
@@ -416,15 +426,16 @@ const yacht = (v, r=[...v]) => v.map(() =>
     <br><br>
     
     <pre>
-    const yacht-fisherfeld = v =>
         
-        [...v].map((x, i, r,
+const yacht-fisherfeld = v =>
+
+    [...v].map((x, i, r,
+
+        j = ~~(Math.random() * (r.length - i)) + i
+
+    ) => ([x, r[j]] = [r[j], x], x)
         
-            j = ~~(Math.random() * (r.length - i)) + i
-            
-        ) => ([x, r[j]] = [r[j], x], x)
-        
-    );
+);
     </pre>
     <br>
     that method preserves the original array
@@ -435,7 +446,9 @@ const yacht = (v, r=[...v]) => v.map(() =>
     </div>
     
     <div id="dataDiv" class="qr"></div>
+
     <div id="sig" class="qr signature"><i>~queviva</i></div>
+
 </div>
 </body>
 
@@ -447,7 +460,7 @@ new function () {
 
     const loops = 100000;
     const trials = 5;
-    const size = 5;
+    const size = 4;
     const showTitle = size < 5;
     const showRands = false;
     
