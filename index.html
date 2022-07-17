@@ -29,7 +29,7 @@ content="width=device-width, initial-scale=1.0">
     --midness: hsl(
         var(--nose-h),
         calc(0.7 * var(--nose-s)),
-        calc(0.7 * var(--nose-l))
+        calc(0.65 * var(--nose-l))
     );
     
     --darkness: hsl(
@@ -106,12 +106,18 @@ emp {
     font-family: luckiest;
     font-style: italic;
     font-weight: bold;
-    -webkit-text-stroke: 2px #888;
+    -webkit-text-stroke: 2px hsl(
+        var(--nose-h),
+        calc(0.2 * var(--nose-s)),
+        calc(0.7 * var(--nose-l))
+    );
 }
 
 sup {
     font-size: 0.5em;
     font-style: italic;
+    text-decoration: underline;
+    text-underline-position: under;
 }
 
 hr {
@@ -395,6 +401,7 @@ const yacht = v => v.forEach((_, i) => v.push(
     
     <hr>
     <div YACHT_METHOD class="qr">
+    
     a non-mutating evolution of the
     Yacht von Fleischerm&#228;nn algorithm
     might look like this, slightly shorter line,
@@ -420,6 +427,7 @@ const yacht = (v, r=[...v]) => v.map(() =>
     
     <hr>
     <div dursten_shuffeld class="qr">
+        
     but you insist upon using some silly
     <i>durstenshuffeld</i> fiasco!
     well then, at least compose it in some
@@ -451,6 +459,138 @@ const yacht-fisherfeld = v =>
     assignment
     </div>
     
+    <hr>
+    <div cut class="qr">
+        alright geniuses, is that the way people
+        typically shuffle cards? huh?
+        <i>no</i>
+        <br><br>
+        maybe we should write some code for
+        <i>cutting</i> a deck:
+        <br><br>
+        
+        <pre>
+            
+const cut = (v, r=[...v], l=r.length) => [
+    ...r.splice(~~(l/2 - 0.1*l + Math.random()*0.2*l)),
+    ...r
+];
+        </pre><br>
+        
+        that takes an array <i>v</i>,
+        makes a reference copy of it <i>r</i>
+        [to keep the original array unmutated],
+        creates a variable equal to the size
+        of the deck <i>l</i>,
+        then returns an array composed from
+        the spread values of the copy
+        [split at a position
+        plus-or-minus ten percent from the
+        middle of the deck], and the spread
+        values of the reliquum
+        <br><br>
+        when the 17<sup>th</sup> century
+        natural philosopher
+        <a href="https://en.wikipedia.org/wiki/Naivety">
+        Na&#239;vett&#233;</a> attempted to
+        program a smaller version of that code,
+        he <i>lost both his eyes</i>
+        
+    </div>
+    
+    <hr>
+    <div riffle class="qr">
+        
+        after his beheading for treason,
+        the 17<sup>th</sup> century
+        natural philosopher
+        <a href="https://en.wikipedia.org/wiki/Naivety">
+        Na&#239;vett&#233;</a>
+        wrote several prominant papers,
+        one of which included this method
+        for <i>riffle shuffling</i> a deck of cards:
+        <br><br>
+        
+        <pre>
+            
+const riffle = (
+    v,
+    k=[...v],
+    l=v.length,
+    r = [k.splice(0, ~~(l/2 - l*0.1 + Math.random()*l* 0.2)), k],
+    t=[],
+    s=~~(Math.random()*2)
+) => {
+    
+    while (
+        t = [
+            ...r[s].splice(0, ~~(Math.random() * (
+                r[s].length > 3 ? 4 : r[s].length
+            )) + 1),
+            ...t
+        ],
+        s ^= 1,
+        t.length < v.length
+    );
+    
+    return t;
+    
+};
+        </pre>
+    
+    </div>
+    
+    <div overhand class="qr">
+        
+        while in prison,
+        the 17<sup>th</sup> century
+        headless philosopher
+        <a href="https://en.wikipedia.org/wiki/Naivety">
+        Na&#239;vett&#233;</a> developed this
+        ridiculous method of overhand shuffling,
+        which added thirteen years to his sentence:
+        <br><br>
+        
+        <pre>
+            
+const overhand = (v, a=[...v], b=[]) => {
+        
+    while (
+        
+        b = [
+            ...a.splice(0, ~~(Math.random() * (a.length > 8 ? 8 : a.length)) + 1),
+            ...b
+        ],
+            
+        b.length < v.length
+        
+    );
+        
+    return b;
+        
+};
+        </pre>
+        
+    </div>
+    
+    <div class="qr">
+        
+        <div>
+            <svg viewbox="0,0,550,550" style="
+                width:100%;
+                transform: scale(-1, 1);
+                --hull-color: var(--blackness);
+                --tower-color: var(--midness);
+                --rod-color: var(--midness);
+                --window-visibility: visible;
+                --window-color: rgba(255,255,255,0.03);
+            ">
+                <use data-nose=":root" xlink:href="yacht.svg#ikon" />
+            </svg>
+        </div>
+    </div>
+    
+    <hr>
     <div id="dataDiv" class="qr"></div>
 
     <div id="sig" class="qr signature"><i>~queviva</i></div>
@@ -716,6 +856,7 @@ new function () {
     genData();
     
     //}
+
     
 }();
 
