@@ -1,7 +1,7 @@
 # scrambiliare
 yacht-fisherman array scrambler
 
-[bite here](https://queviva.github.io/scramble/)
+[bite here](https://queviva.github.io/yacht-fisher/)
 
 this single line:
 
@@ -12,7 +12,7 @@ this single line:
 ```
 
 will produce a scrambled array _without_ bias;
-[find out why!](https://queviva.github.io/scramble/)
+[find out why!](https://queviva.github.io/yacht-fisher/)
 
 <img src="yacht.png" width="100px">
 
@@ -30,11 +30,11 @@ this silly thing:
 ```
 also one line, will produce a _forward running_,
 more conventional,
-[durstenshuffle](https://queviva.github.io/scramble/)
+[durstenshuffle](https://queviva.github.io/yacht-fisher/)
 which does _not_ destroy the original array - incase you
 should want such a thing
 
-[discover why](https://queviva.github.io/scramble/)
+[discover why](https://queviva.github.io/yacht-fisher/)
 
 
 
