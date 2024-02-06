@@ -20,7 +20,7 @@ this silly thing:
 ```
     const yacht-stenshuffeld = v =>
         
-        [...v].map((x, i, r,
+        v.map((x, i, r,
         
             j = ~~(Math.random() * (r.length - i)) + i
             
