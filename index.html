@@ -439,7 +439,7 @@ const yacht = (v, r=[...v]) => v.map(() =>
         
 const yacht-fisherfeld = v =>
 
-    [...v].map((x, i, r,
+    v.map((x, i, r,
 
         j = ~~(Math.random() * (r.length - i)) + i
 
@@ -655,7 +655,7 @@ new function () {
         r.splice(~~(Math.random() * r.length), 1)[0]
     ),
     
-    v => [...v].map((x, i, r,
+    v => v.map((x, i, r,
             j = ~~(Math.random() * (r.length - i)) + i
     ) => ([x, r[j]] = [r[j], x], x))
     
